@@ -31,4 +31,4 @@ spec:
             port: 3000
             path: /
           periodSeconds: 10
-          failureThreshold: 3
+          failureThreshold: 6
