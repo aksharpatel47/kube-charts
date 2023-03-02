@@ -30,3 +30,5 @@ spec:
           httpGet:
             port: 3000
             path: /
+          periodSeconds: 10
+          failureThreshold: 3
