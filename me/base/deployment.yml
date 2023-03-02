@@ -4,6 +4,7 @@ metadata:
   name: me
   namespace: me
 spec:
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: me
@@ -18,3 +19,13 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            port: 3000
+            path: /
+          initialDelaySeconds: 60
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            port: 3000
+            path: /
