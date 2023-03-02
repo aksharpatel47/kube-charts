@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: me
+  namespace: me
+  annotations:
+    cert-manager.io/issuer: letsencrypt
+spec:
+  tls:
+  - hosts:
+      - aksharpatel47.com
+    secretName: me-tls
+  rules:
+  - host: aksharpatel47.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: me
+            port:
+              number: 80
