@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: me
-        image: ghcr.io/aksharpatel47/me:main-16
+        image: ghcr.io/aksharpatel47/me:main-17
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
