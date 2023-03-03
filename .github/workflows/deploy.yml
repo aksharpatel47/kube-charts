@@ -24,6 +24,8 @@ jobs:
           sed -i "s|ghcr.io/aksharpatel47/me:.*|ghcr.io/aksharpatel47/me:${{ github.event.inputs.tag }}|g" ${{ github.event.inputs.path }}
       - name: Commit and push changes
         run: |
+          git config --global user.email akshar.patel.47@gmail.com
+          git config --global user.name aksharpatel47
           git add ${{ github.event.inputs.path }}
           git commit -m "Update image tag for ${{ github.event.inputs.path }} to ${{ github.event.inputs.tag }}"
           git push origin main
