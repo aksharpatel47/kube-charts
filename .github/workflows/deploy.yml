@@ -1,0 +1,30 @@
+name: Deploy
+on:
+  workflow_dispatch:
+    inputs:
+      path:
+        description: 'Path to the chart to deploy'
+        required: true
+        default: 'me/base/deployment.yml'
+      image:
+        description: 'Name of the image to deploy'
+        required: true
+        default: 'ghcr.io/aksharpatel47/me'
+      tag:
+        description: 'Tag of the image to deploy'
+        required: true
+        default: 'main-7'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update image tag in deployment
+        run: |
+          sed -i "s|ghcr.io/aksharpatel47/me:.*|ghcr.io/aksharpatel47/me:${{ github.event.inputs.tag }}|g" ${{ github.event.inputs.path }}
+      - name: Commit and push changes
+        run: |
+          git add ${{ github.event.inputs.path }}
+          git commit -m "Update image tag for ${{ github.event.inputs.path }} to ${{ github.event.inputs.tag }}"
+          git push origin main
+          
